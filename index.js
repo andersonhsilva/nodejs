@@ -12,16 +12,30 @@ const cursos = ['Node JS', 'JavaScript', 'React Native'];
 
 // route params GET -> listar tudo
 server.get('/cursos', (req, res) => {
-    return res.json(cursos);
+
+    return res.json(cursos); // retorna o array de dados
+    
 });
 
 // request body -> POST
 server.post('/curso', (req, res) => {
-    const { name } = req.body;
+
+    const { name } = req.body; // captura o parametro do body
     cursos.push(name); // adiciona um novo elemento no array js
-    return res.json(cursos);
+
+    return res.json(cursos); // retorna o array de dados
 });
 
+// request body -> PUT
+server.put('/curso/:eixo', (req, res) => {
+
+    const { eixo } = req.params; // pega o parametro do route param com o eixo
+    const { name } = req.body; // pega o parametro do request body json com o name
+
+    cursos[eixo] = name; // atualiza o array js com o nome do elemento partindo do eixo
+
+    return res.json(cursos); // retorna o array de dados
+});
 
 // inicia o servidor node nesta porta
 server.listen(3333);
