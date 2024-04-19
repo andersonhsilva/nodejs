@@ -13,10 +13,8 @@ const server = express();
 
 // query params
 server.get('/curso', (req, res) => {
-
     const nome = req.query.nome;
     return res.json({ curso: `Aprendendo: ${nome}` });
-
 });
 
 // route params
