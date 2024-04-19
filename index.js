@@ -2,6 +2,12 @@ const express = require('express');
 const server = express();
 
 /*
+atencao: define o tipo de dado passado pelop post ao servidor node pra do tipo json, evita o erro a baixo:
+        TypeError: Cannot destructure property 'name' of 'req.body' as it is undefined
+*/
+server.use(express.json());
+
+/*
     Query Params = ?nome=anderson
     Route Params = /curso/2
     Request Body = { nome: 'anderson', cpf: 06926903441 }
@@ -9,20 +15,33 @@ const server = express();
     variaveis:
     req = dados da nossa aplicacao, query param ou dados do body
     res = representa uma resposta pra o nosso frontend
+
+    CRUD = Create, Read, Update e Delete
 */
 
 // query params
 server.get('/curso', (req, res) => {
-
     const nome = req.query.nome;
     return res.json({ curso: `Aprendendo: ${nome}` });
+});
 
+const cursos = ['Node JS', 'JavaScript', 'React Native'];
+
+// route params GET
+server.get('/cursos', (req, res) => {
+    return res.json(cursos);
+});
+
+// request body -> route POST
+server.post('/curso', (req, res) => {
+    const {name} = req.body;
+    cursos.push(name);
+    return res.json(cursos);
 });
 
 // route params
 server.get('/curso/:num', (req, res) => {
-    const cursos = ['Node JS', 'JavaScript', 'React Native'];
-    const { num } = req.params;
+    const {num} = req.params;
     return res.json(cursos[num]);
 });
 
