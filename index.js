@@ -37,5 +37,17 @@ server.put('/curso/:eixo', (req, res) => {
     return res.json(cursos); // retorna o array de dados
 });
 
+
+// request body -> DELETE
+server.delete('/curso/:eixo', (req, res) => {
+
+    const { eixo } = req.params; // pega o parametro do route param com o eixo
+    const { name } = req.body; // pega o parametro do request body json com o name
+
+    cursos.splice(eixo, 1); // exclui o elemento do array js com o splice
+
+    return res.json(cursos); // retorna o array de dados
+});
+
 // inicia o servidor node nesta porta
 server.listen(3333);
