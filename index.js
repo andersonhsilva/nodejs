@@ -16,13 +16,13 @@ server.get('/cursos', (req, res) => {
 });
 
 // request body -> GET
-server.get('/curso/:eixo', middleware_eixo_curso, (req, res) => {
+server.get('/curso/:eixo', (req, res) => {
     const { eixo } = req.params; // pega o parametro do route param com o eixo
     return res.json(cursos[eixo]); // retorna o objeto do eixo do array de dados
 });
 
 // request body -> POST
-server.post('/curso', middleware_curso, (req, res) => {
+server.post('/curso', (req, res) => {
 
     const { name } = req.body; // captura o parametro do body
     cursos.push(name); // adiciona um novo elemento no array js
@@ -31,7 +31,7 @@ server.post('/curso', middleware_curso, (req, res) => {
 });
 
 // request body -> PUT
-server.put('/curso/:eixo', middleware_curso, middleware_eixo_curso, (req, res) => {
+server.put('/curso/:eixo', (req, res) => {
 
     const { eixo } = req.params; // pega o parametro do route param com o eixo
     const { name } = req.body; // pega o parametro do request body json com o name
@@ -43,7 +43,7 @@ server.put('/curso/:eixo', middleware_curso, middleware_eixo_curso, (req, res) =
 
 
 // request body -> DELETE
-server.delete('/curso/:eixo', middleware_eixo_curso, (req, res) => {
+server.delete('/curso/:eixo', (req, res) => {
 
     const { eixo } = req.params; // pega o parametro do route param com o eixo
     const { name } = req.body; // pega o parametro do request body json com o name
