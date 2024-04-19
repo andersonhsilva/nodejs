@@ -10,26 +10,6 @@ server.use(express.json());
 // CRUD = Create, Read, Update e Delete
 const cursos = ['Node JS', 'JavaScript', 'React Native'];
 
-// middleware em formato padrao
-server.use((req, res, next) => {
-    console.log(`rul chamada: ${req.url}`);
-    return next();
-});
-
-// middleware em formato de funcao para uso em uma determinada rota especifica
-function middleware_curso(req, res, next) {
-    if (!req.body.name) return res.status(400).json({ error: "O nome do curso é obrigatorio" });
-    return next();
-}
-
-function middleware_eixo_curso(req, res, next) {
-    const curso = cursos[req.params.eixo];
-    req.curso = curso; // criei uma nova variavel no req para uso posterior a middleware
-
-    if (!curso) return res.status(400).json({ error: "O curso não existe" });
-    return next();
-}
-
 // route params GET -> listar tudo
 server.get('/cursos', (req, res) => {
     return res.json(cursos); // retorna o array de dados  
@@ -37,15 +17,8 @@ server.get('/cursos', (req, res) => {
 
 // request body -> GET
 server.get('/curso/:eixo', middleware_eixo_curso, (req, res) => {
-
-    /*
-    obs: com a criaçao da variavel "req.curso" na "middleware_eixo_curso"  eu simplifiquei este metodo com apenas o return
-    
     const { eixo } = req.params; // pega o parametro do route param com o eixo
     return res.json(cursos[eixo]); // retorna o objeto do eixo do array de dados
-    */
-
-    return res.json(req.curso);
 });
 
 // request body -> POST
