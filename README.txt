@@ -2,7 +2,7 @@
 - biblioteca para uso de rotas 
 npm install express
 
-- biblioteca para atualizacao da aplicacao node no backend em tempo real famoso live load
+- biblioteca para atualizacao da aplicacao node no backend em tempo real famoso live reload
 npm install nodemon -D 
 npm install -g nodemon 
 
